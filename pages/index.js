@@ -1,6 +1,30 @@
-import Head from 'next/head'
+import { useEffect } from "react";
+import Head from "next/head";
+import KakaoLogin from "react-kakao-login";
+import Kakaomodule from "./kakaomodule/index.tsx";
 
 export default function Home() {
+  const successFunc = (res) => {
+    alert(JSON.stringify(res));
+  };
+
+  const failFunc = (err) => {
+    console.log(err);
+  };
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://developers.kakao.com/sdk/js/kakao.min.js";
+    document.head.appendChild(script);
+
+    // window.kakao.init("cb0517490a84f5f41e7be68532948f40");
+    // window.kakao.Channel.createAddChannelButton({
+    //   container: "#kakao-add-channel-button",
+    //   channelPublicId: "_fiFDxb", // 채널 홈 URL에 명시된 id로 설정합니다.
+    // });
+  });
+
   return (
     <div className="container">
       <Head>
@@ -16,6 +40,16 @@ export default function Home() {
         <p className="description">
           Get started by editing <code>pages/index.js</code>
         </p>
+
+        <KakaoLogin
+          jsKey={"cb0517490a84f5f41e7be68532948f40"}
+          onSuccess={successFunc}
+          onFailure={failFunc}
+        />
+        <Kakaomodule
+          jsKey={"cb0517490a84f5f41e7be68532948f40"}
+          channelPublicId={"_fiFDxb"}
+        />
 
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
@@ -54,7 +88,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
         </a>
       </footer>
@@ -205,5 +239,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }
