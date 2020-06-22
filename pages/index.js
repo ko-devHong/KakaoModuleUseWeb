@@ -12,19 +12,6 @@ export default function Home() {
     console.log(err);
   };
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = "https://developers.kakao.com/sdk/js/kakao.min.js";
-    document.head.appendChild(script);
-
-    // window.kakao.init("cb0517490a84f5f41e7be68532948f40");
-    // window.kakao.Channel.createAddChannelButton({
-    //   container: "#kakao-add-channel-button",
-    //   channelPublicId: "_fiFDxb", // 채널 홈 URL에 명시된 id로 설정합니다.
-    // });
-  });
-
   return (
     <div className="container">
       <Head>
