@@ -32,9 +32,18 @@ const KakaoTalk = (props) => {
   });
 
   const AddAgreeButton = () => {
-    window.Kakao.Auth.authorize({
-      redirectUri: "http://localhost:3000/oauth",
+    // window.Kakao.Auth.authorize({
+    //   redirectUri: "http://localhost:3000/oauth",
+    //   scope: "friends",
+    // });
+    window.Kakao.Auth.login({
       scope: "friends",
+      success: function (response) {
+        console.log(response);
+      },
+      fail: function (error) {
+        console.log(error);
+      },
     });
   };
 

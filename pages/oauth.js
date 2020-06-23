@@ -1,7 +1,27 @@
 import Head from "next/head";
 import KakaoTalk from "./kakaomodule/kakaotalk.tsx";
+import KakaoAPI from "./kakaomodule/kakaoAPI.tsx";
+import { useEffect, useState } from "react";
 
 export default function Oauth() {
+  const [codeVlaue, setCodeValue] = useState("");
+  function getParameter(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+    return results === null
+      ? ""
+      : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
+  useEffect(() => {
+    var getCode = getParameter("code");
+    if (getCode) {
+      setCodeValue(getCode);
+    } else {
+      alert("취소 누름 ");
+    }
+  });
   return (
     <div className="container">
       <Head>
@@ -17,6 +37,7 @@ export default function Oauth() {
         <p className="description">
           Get started by editing <code>pages/index.js</code>
         </p>
+        <KakaoAPI jsKey={"cb0517490a84f5f41e7be68532948f40"} code={codeVlaue} />
         <KakaoTalk jsKey={"cb0517490a84f5f41e7be68532948f40"} />
       </main>
 
